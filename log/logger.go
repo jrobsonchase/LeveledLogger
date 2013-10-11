@@ -77,3 +77,7 @@ func (l *LvlLogger) SetPrefix(n int, prefix string) {
 func (l *LvlLogger) Prefix(n int) string {
 	return l.loggers[n].Prefix()
 }
+
+func Fatal(v ...interface{}) {
+	L.Fatal(v)
+}
