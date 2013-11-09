@@ -27,6 +27,8 @@ var Out *LvlLogger
 var Err *LvlLogger
 
 func init() {
+	Out = &LvlLogger{}
+	Err = &LvlLogger{}
 	Out.loggers = make([]*L.Logger, 10)
 	Err.loggers = make([]*L.Logger, 10)
 	Out.SetLevel(1)
@@ -39,19 +41,23 @@ func init() {
 
 func (l *LvlLogger) Print(n int, v ...interface{}) {
 	if n < l.lvl {
-		l.loggers[n].Print(v)
+		l.loggers[n].Print(v...)
 	}
 }
 
 func (l *LvlLogger) Printf(n int, format string, v ...interface{}) {
 	if n < l.lvl {
-		l.loggers[n].Printf(format, v)
+		if v != nil {
+			l.loggers[n].Printf(format, v...)
+		} else {
+			l.loggers[n].Printf(format)
+		}
 	}
 }
 
 func (l *LvlLogger) Println(n int, v ...interface{}) {
 	if n < l.lvl {
-		l.loggers[n].Println(v)
+		l.loggers[n].Println(v...)
 	}
 }
 
@@ -79,5 +85,5 @@ func (l *LvlLogger) Prefix(n int) string {
 }
 
 func Fatal(v ...interface{}) {
-	L.Fatal(v)
+	L.Fatal(v...)
 }
