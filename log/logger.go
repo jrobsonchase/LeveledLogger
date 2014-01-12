@@ -22,6 +22,7 @@ package log
 import (
 	L "log"
 	"os"
+	"io"
 )
 
 const (
@@ -105,4 +106,10 @@ func (l *LvlLogger) Prefix(n int) string {
 
 func Fatal(v ...interface{}) {
 	L.Fatal(v...)
+}
+
+func (l *LvlLogger) SetOutput(wr io.Writer) {
+	for i := range l.loggers {
+		l.loggers[i] = L.New(wr,"",0)
+	}
 }
