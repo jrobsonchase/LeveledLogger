@@ -59,13 +59,13 @@ func init() {
 	}
 }
 
-func (l *LvlLogger) Print(n int, v ...interface{}) {
+func (l *LvlLogger) Lprint(n int, v ...interface{}) {
 	if n < l.lvl {
 		l.loggers[n].Print(v...)
 	}
 }
 
-func (l *LvlLogger) Printf(n int, format string, v ...interface{}) {
+func (l *LvlLogger) Lprintf(n int, format string, v ...interface{}) {
 	if n < l.lvl {
 		if v != nil {
 			l.loggers[n].Printf(format, v...)
@@ -75,7 +75,7 @@ func (l *LvlLogger) Printf(n int, format string, v ...interface{}) {
 	}
 }
 
-func (l *LvlLogger) Println(n int, v ...interface{}) {
+func (l *LvlLogger) Lprintln(n int, v ...interface{}) {
 	if n < l.lvl {
 		l.loggers[n].Println(v...)
 	}
